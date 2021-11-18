@@ -1,9 +1,10 @@
-import { IS_LOADING, LOGIN_SUCCESS } from "./types";
+import { IS_LOADING, LOGIN_SUCCESS,USER_LIST, IS_LOGOUT } from "./types";
 
 const initialState = {
-    isLoading:false,
+    isLoading: false,
     isLogin: false,
-    userData:{}
+    islogout: false,
+    userList: []
 }
 
 const userReducer = (state = initialState, action) => {
@@ -15,13 +16,28 @@ const userReducer = (state = initialState, action) => {
             }
         }
 
-        case LOGIN_SUCCESS:{
+        case LOGIN_SUCCESS: {
             return {
                 ...state,
-                userData: action.payload
+                userList: action.payload
             }
         }
 
+        case USER_LIST:
+        {
+            console.log("ULIST ", action.payload)
+            return {
+                    ...state,
+                    userList: action.payload
+            }
+        }
+
+        case IS_LOGOUT: {
+            return {
+                ...state,
+                userList: null
+            }
+        }
 
         default:
             return initialState;
